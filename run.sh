@@ -42,19 +42,16 @@ else
         ipaddress=$(cat "$CACHE_FILE")
         echo "Trying cached IP: $ipaddress"
         connect_device
-        e=$?
-        if [ $e -ne 0 ]; then
+        if [ $? -ne 0 ]; then
             echo "Cached IP failed. Please enter a new IP."
             get_ip_address
             connect_device
-            e=$?
         fi
     else
         get_ip_address
         connect_device
-        e=$?
     fi
-    if [ $e -ne 0 ]; then
+    if [ $? -ne 0 ]; then
         echo "Could not connect to device. Exiting."
         exit 1
     fi
