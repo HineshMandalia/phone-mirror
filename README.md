@@ -10,7 +10,7 @@ This bash script automates the process of connecting to an Android device over W
    - Enables TCP/IP mode on the device (`adb tcpip 5555`).
    - Attempts to use a cached IP address from `.cache` file.
    - If the cached IP works, connects to it.
-   - If not, prompts the user for the phone's IP address, connects, and caches it for future use.
+   - If not, prompts the user for the phone's IP address (or automatically scans the local network for devices with port 5555 open if none provided), connects, and caches it for future use.
 4. Launches scrcpy for screen mirroring.
 5. Cleans up by disconnecting the device if it was connected via IP.
 
@@ -24,6 +24,10 @@ This bash script automates the process of connecting to an Android device over W
 - Install scrcpy:
   ```
   brew install scrcpy
+  ```
+- Install nmap (for network scanning):
+  ```
+  brew install nmap
   ```
 
 ### Linux
@@ -40,20 +44,26 @@ This bash script automates the process of connecting to an Android device over W
   ```
   sudo snap install scrcpy
   ```
+- Install nmap (for network scanning):
+  ```
+  sudo apt install nmap
+  ```
 
 ### General Requirements
 - Android device with USB debugging enabled.
-- Device initially connected via USB for the first setup.
+- Device must have wireless debugging enabled, either by:
+  - Initially connecting via USB and running `adb tcpip 5555`, or
+  - Pairing wirelessly using `adb pair <IP>:5555` (where <IP> is the device's IP address).
 - WiFi connection between your computer and the Android device.
 
 ## How to Run
 
-1. Ensure your Android device is connected via USB and USB debugging is enabled.
+1. Ensure your Android device has wireless debugging enabled (via USB or pairing).
 2. Run the script:
    ```
    ./run.sh
    ```
-3. If prompted, enter your phone's IP address (found in Settings > About Phone > Status > IP Address).
+3. If prompted, enter your phone's IP address or press Enter to automatically scan the network for the device.
 4. The script will connect wirelessly and start scrcpy for mirroring.
 
 ## Notes
