@@ -1,4 +1,4 @@
-# Phone Mirror Script
+# Quick Phone Mirror Script
 
 This bash script automates the process of connecting to an Android device over WiFi using ADB (Android Debug Bridge) and launching scrcpy for screen mirroring.
 
